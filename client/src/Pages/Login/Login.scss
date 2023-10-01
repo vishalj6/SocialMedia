@@ -1,0 +1,144 @@
+// font-family: "Billabong W00 Regular";
+// font-family: 'Yellowtail', cursive;
+
+
+.login {
+    min-height: 100dvh;
+    // min-width: 100dvw;
+    // background-color: rgb(193, 190, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .card {
+        // width: 50%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        background-color: white;
+        min-height: 600px;
+        padding: 30px 20px 20px 20px;
+        // overflow: hidden;
+
+        .left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex: 1;
+
+            .bgc {
+                width: 100%;
+                background: url("../../Others/home-phones.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+                min-width: 380px;
+                padding: 50px;
+                position: relative;
+
+                img {
+                    transform: translate(61px, -28px);
+                }
+
+
+                @media (max-width: 480px) {
+                    display: none;
+                    background-color: #fff;
+                }
+            }
+
+        }
+
+        .right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 350px;
+            gap: 10px;
+            margin: 20px 5px 20px 0px;
+
+            .card1 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                border: 1px solid #80808087;
+                border-radius: 5px;
+
+                h1 {
+                    padding-top: 30px;
+                    padding: 25px 15px 0px 15px;
+                    color: #3f3f3f;
+                    font-family: 'Pacifico', cursive;
+                    font-size: 50px;
+                }
+
+                form {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 20px;
+                    width: 100%;
+
+                    input {
+                        width: 100%;
+                        background-color: rgba(240, 240, 240, 0.377);
+                        border: 1px solid rgba(150, 150, 150, 0.452);
+                        border-radius: 5px;
+                        padding: 10px 10px;
+                    }
+
+                    input:hover {
+                        background-color: rgba(240, 240, 240, 0.815);
+                    }
+
+                    input:focus {
+                        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 2px;
+                        outline: 1px solid rgba(0, 0, 0, 0.363);
+                    }
+
+                    button {
+                        margin-top: 10px;
+                        padding: 10px;
+                        border: none;
+                        background-color: rgb(44, 142, 222);
+                        color: white;
+                        font-weight: bold;
+                        font-size: 16px;
+                        cursor: pointer;
+                        width: 100%;
+                        border-radius: 10px;
+                    }
+
+                    button:hover {
+                        background-color: rgb(24, 97, 207);
+                    }
+                }
+
+                p {
+                    color: rgb(4, 63, 145);
+                    cursor: pointer;
+                    padding-bottom: 20px;
+                }
+            }
+
+            .card2 {
+                padding: 30px;
+                border: 1px solid #80808087;
+                border-radius: 5px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+
+                span {
+                    color: rgb(0, 140, 255);
+                    font-weight: bold;
+                    cursor: pointer;
+                }
+            }
+
+        }
+    }
+}

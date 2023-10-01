@@ -1,0 +1,112 @@
+
+.main_register {
+    height: 100dvh;
+    max-width: 100dvw;
+    // background-color: rgb(193, 190, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+
+    .right {
+        width: 30%;
+        min-width: 380px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        
+        .card1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 50px;
+            border: 1px solid #80808087;
+            border-radius: 5px;
+
+            h1 {
+                padding-top: 30px;
+                padding: 15px;
+                color: #3f3f3f;
+                font-family: 'Pacifico', cursive;
+                font-size: 50px;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+                width: 100%;
+
+                input {
+                    width: 100%;
+                    background-color: rgba(240, 240, 240, 0.377);
+                    border: 1px solid rgba(150, 150, 150, 0.452);
+                    border-radius: 5px;
+                    padding: 10px 10px;
+                }
+
+                input:hover {
+                    background-color: rgba(240, 240, 240, 0.815);
+                    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 2px;
+                }
+
+                input:focus {
+                    outline: 1px solid rgba(0, 0, 0, 0.363);
+                }
+
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    // margin: 0;
+                }
+
+                button {
+                    margin-top: 10px;
+                    padding: 10px;
+                    border: none;
+                    background-color: rgb(44, 142, 222);
+                    color: white;
+                    font-weight: bold;
+                    font-size: 16px;
+                    cursor: pointer;
+                    width: 100%;
+                    border-radius: 10px;
+                }
+
+                button:hover {
+                    background-color: rgb(24, 116, 207);
+                }
+            }
+
+            p {
+                color: rgb(4, 63, 145);
+                text-align: center;
+            }
+
+            terms {
+                color: rgb(4, 63, 145);
+                padding-bottom: 20px;
+            }
+        }
+
+        .card2 {
+            // flex: 1;
+            padding: 30px;
+            border: 1px solid #80808087;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+
+            span {
+                color: rgb(0, 140, 255);
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
+    }
+}
