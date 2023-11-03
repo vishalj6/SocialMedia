@@ -10,7 +10,7 @@ import Profile from "./Pages/Profile/Profile";
 import { DarkModeContext } from "./context/darkModeContext";
 import "./style.scss";
 import { useContext } from 'react';
-import { RequireAuth } from 'react-auth-kit';
+// import { RequireAuth } from 'react-auth-kit';
 
 const Layout = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -32,11 +32,11 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />} >
-        <Route exact index element={<RequireAuth loginPath={'/login'}><Home /> </RequireAuth> } />
-        <Route exact path='/profile' element={<RequireAuth loginPath={'/login'}> <Profile /> </RequireAuth>} />
+        <Route exact index element={<Home />} />
+        <Route exact path='/profile' element={<Profile />} />
       </Route>
-        <Route exact path='/register' element={<Register />} />
-        <Route exact path='/login' element={<Login />} />
+      <Route exact path='/register' element={<Register />} />
+      <Route exact path='/login' element={<Login />} />
     </Routes>
   );
 }

@@ -1,14 +1,12 @@
 $themes: (
-  light: (
-    textColor: #000,
+  light: (textColor: #000,
     bg: white,
     logo: darkblue,
     bgSoft: #f6f3f3,
     textColorSoft: #555,
     border: lightgray,
   ),
-  dark: (
-    textColor: whitesmoke,
+  dark: (textColor: whitesmoke,
     bg: #151515,
     logo: white,
     bgSoft: #272727,
@@ -20,20 +18,21 @@ $themes: (
 @mixin themify($themes) {
   @each $theme, $map in $themes {
     .theme-#{$theme} & {
-      $theme-map: () !global;
-      @each $key, $submap in $map {
-        $value: map-get(map-get($themes, $theme), "#{$key}");
-        $theme-map: map-merge(
-          $theme-map,
-          (
-            $key: $value,
-          )
+      $theme-map: (
         ) !global;
-      }
-      @content;
-      $theme-map: null !global;
+
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), "#{$key}"
+        );
+      $theme-map: map-merge($theme-map,
+          ($key: $value,
+          )) !global;
     }
+
+    @content;
+    $theme-map: null !global;
   }
+}
 }
 
 @function themed($key) {
@@ -45,6 +44,13 @@ $themes: (
     @content;
   }
 }
+
+@mixin medium {
+  @media (max-width: 768px) {
+    @content
+  }
+}
+
 @mixin tablet {
   @media (max-width: 960px) {
     @content;

@@ -12,6 +12,7 @@ import { useState } from "react";
 const Post = ({ post }) => {
   const [commentOpen, setCommentOpen] = useState(false);
   const [like, setlike] = useState(false);
+  const [descopen, setDescopen] = useState(false);
 
   //TEMPORARY
   // let liked = false;
@@ -39,26 +40,34 @@ const Post = ({ post }) => {
         </div>
         <div className="info">
           <div className="item" onClick={() => setlike(!like)} >
-            {like ? <FavoriteOutlinedIcon style={{fontSize:"28px"}} /> : <FavoriteBorderOutlinedIcon style={{fontSize:"28px"}} />}
+            {like ? <FavoriteOutlinedIcon style={{ fontSize: "28px" }} /> : <FavoriteBorderOutlinedIcon style={{ fontSize: "28px" }} />}
             {/* 12 Likes */}
           </div>
           <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
-            <ChatBubbleOutlineOutlinedIcon style={{fontSize:"26px"}}/>
+            <ChatBubbleOutlineOutlinedIcon style={{ fontSize: "26px" }} />
             {/* 12 Comments */}
           </div>
           <div className="item">
-            <SendIcon className="sendicon"/>
+            <SendIcon className="sendicon" />
             Share
           </div>
         </div>
         <div className="content">
-          <p>{ 
-          like ? 233616 : 233615
-          } likes</p>
-          <p><Link  to={`/profile/${post.userId}`} style={{ textDecoration: "none", color: "inherit" }}> <b>{post.name} </b></Link> {post.desc}</p>
-          <p className="viewallcomments"  onClick={() => setCommentOpen(!commentOpen)}>View all comments</p>
-          {commentOpen && <Comments />}
+          <p>{
+            like ? 233616 : 233615
+          } likes
+          </p>
+          <div className="namedesc" style={{ height: descopen ? "auto" : "18px", overflow: "hidden" }}>
+            <Link to={`/profile/${post.userId}`} style={{ textDecoration: "none", color: "inherit" }}>
+              <b>{post.name} </b>
+            </Link>
+            <span onClick={() => setDescopen(!descopen)}>
+              {post.desc}
+            </span>
+          </div>
+          <p className="viewallcomments" onClick={() => setCommentOpen(!commentOpen)}>View all comments</p>
         </div>
+        {commentOpen && <Comments />}
         {/* <hr /> */}
       </div>
     </div>

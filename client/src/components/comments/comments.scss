@@ -1,6 +1,8 @@
 @import "../../style.scss";
 
 .comments {
+  width: 100%;
+
   @include themify($themes) {
     img {
       width: 40px;
@@ -9,22 +11,25 @@
       object-fit: cover;
     }
 
-    .write{
+    .write {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 10px;
       margin: 20px 0px;
+      // flex-wrap: wrap;
+      // width: 100%;
 
-      input{
-        flex:5;
+      input {
+        // flex: 1;
+        width: 100%;
         padding: 10px;
         border: 1px solid themed("border");
         background-color: transparent;
         color: themed("textColor");
       }
 
-      button{
+      button {
         border: none;
         background-color: #5271ff;
         color: white;
@@ -35,31 +40,31 @@
     }
 
     .comment {
-      margin: 30px 0px;
+      margin: 20px 0px;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 20px;
 
       .info {
-        flex:6;
+        flex: 6;
         margin: 0;
-        
+
         span {
           font-weight: 700;
-          color:themed("textColorSoft");
+          color: themed("textColorSoft");
         }
-        
-        p{
-          color:themed("textColorSoft")
-        }
-      }
 
-      .date{
-        flex:1;
-        align-self: center;
-        color: gray;
-        font-size: 12px;
+        div {
+          color: themed("textColorSoft");
+
+          .date {
+            // align-self: center;
+            margin-top: 5px;
+            color: gray;
+            font-size: 12px;
+          }
+        }
       }
     }
   }

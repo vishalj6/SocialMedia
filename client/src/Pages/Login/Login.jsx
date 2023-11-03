@@ -12,11 +12,13 @@ const Login = () => {
   const signIn = useSignIn();
   const isAuth = useIsAuthenticated();
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
+
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
   });
-
 
   useEffect(() => {
     if (isAuth()) {
@@ -26,12 +28,11 @@ const Login = () => {
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  const { login } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:6001/login", {inputs}, { withCredentials: true });
+      const response = await axios.post("auth/login", { inputs }, { withCredentials: true });
 
       console.log("rrrr", response);
       if (response && response.status === 201) {
@@ -45,12 +46,11 @@ const Login = () => {
           authState: { username: inputs.username }
         });
         login(response.data.user);
-        navigate("/");
-        // console.log("This is Response data in Sign in", response.data);
+        console.log("This is Response data in Sign in", response.data);
         // setCurrentUser(response.data.user);
-        // setTimeout(() => {
-        // }, 2000);
-
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       }
     }
     catch (err) {
@@ -71,47 +71,49 @@ const Login = () => {
   };
 
   return (
-    <div className="loginmain">
-      <div className="login">
-        <div className="card">
-          <div className="left">
-            <div className="bgc">
-              <img src={require('../../Others/screenshot3.png')} alt="" />
-              {/* <img src={require('../../Others/screenshot4.png')} alt="" /> */}
+    <>
+      <div className="loginmain">
+        <div className="login">
+          <div className="card">
+            <div className="left">
+              <div className="bgc">
+                <img src={require('../../Others/screenshot3.png')} alt="" />
+                {/* <img src={require('../../Others/screenshot4.png')} alt="" /> */}
+              </div>
+            </div>
+            <div className="right">
+              <div className="card1">
+                <h1>SocialPulse</h1>
+                <form>
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    name="username"
+                    onChange={handleChange}
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    onChange={handleChange}
+                  />
+                  <button onClick={handleLogin}>Log in</button>
+                </form>
+                <p>Forgot Password?</p>
+              </div>
+              <div className="card2">
+                <p>Don't have an account?
+                  <Link to="/register">
+                    <span> Sign Up </span>
+                  </Link>
+                </p>
+              </div>
             </div>
           </div>
-          <div className="right">
-            <div className="card1">
-              <h1>SocialPulse</h1>
-              <form>
-                <input
-                  type="text"
-                  placeholder="Username"
-                  name="username"
-                  onChange={handleChange}
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  onChange={handleChange}
-                />
-                <button onClick={handleLogin}>Log in</button>
-              </form>
-              <p>Forgot Password?</p>
-            </div>
-            <div className="card2">
-              <p>Don't have an account?
-                <Link to="/register">
-                  <span> Sign Up </span>
-                </Link>
-              </p>
-            </div>
-          </div>
-          <ToastContainer />
         </div>
       </div>
-    </div>
+      <ToastContainer />
+    </>
   );
 };
 

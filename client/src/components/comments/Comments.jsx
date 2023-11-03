@@ -1,7 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import "./comments.scss";
 import { AuthContext } from "../../context/authContext";
 import { Link } from "react-router-dom";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 
 const Comments = () => {
   const { currentUser } = useContext(AuthContext);
@@ -24,6 +26,8 @@ const Comments = () => {
         "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
     },
   ];
+
+  const [commentliked, setCommentLiked] = useState(true);
   return (
     <div className="comments">
       <div className="write">
@@ -31,15 +35,20 @@ const Comments = () => {
         <input type="text" placeholder="write a comment" />
         <button>Send</button>
       </div>
-      {comments.map((comment) => (
-        <div className="comment">
+      {comments.map((comment, index) => (
+        <div className="comment" key={index}>
           <Link to={`/profile/${comment.userId}`} style={{ textDecoration: "none", color: "inherit" }}>
             <img src={comment.profilePicture} alt="" />
           </Link>
-          <div className="info">
-            <p><span> {comment.name} </span> {comment.desc} </p>
+          <div className="info" onDoubleClick={() => setCommentLiked(!commentliked)}>
+            <div>
+              <span> {comment.name} </span> {comment.desc}
+              <p className="date">1 hour ago</p>
+            </div>
           </div>
-          <span className="date">1 hour ago</span>
+          {
+            commentliked ? <FavoriteOutlinedIcon style={{ fontSize: "16px" }} /> : <FavoriteBorderOutlinedIcon style={{ fontSize: "16px" }} />
+          }
         </div>
       ))}
     </div>

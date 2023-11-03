@@ -43,6 +43,7 @@ const Register = () => {
                 });
             }
             console.log(err);
+            setErr(err);
         }
     };
 
@@ -68,15 +69,15 @@ const Register = () => {
                                 onChange={handleChange}
                             />
                             <input
-                                type="password"
-                                placeholder="Password"
-                                name="password"
-                                onChange={handleChange}
-                            />
-                            <input
                                 type="text"
                                 placeholder="Name"
                                 name="name"
+                                onChange={handleChange}
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                name="password"
                                 onChange={handleChange}
                             />
                             {err && err}
@@ -91,10 +92,9 @@ const Register = () => {
                             </Link>
                         </p>
                     </div>
-                <ToastContainer />
                 </div>
-
             </div>
+            <ToastContainer />
         </>
     )
 }

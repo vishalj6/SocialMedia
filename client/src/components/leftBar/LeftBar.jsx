@@ -14,7 +14,7 @@ import Courses from "../../assets/12.png";
 import Fund from "../../assets/13.png";
 import { AuthContext } from "../../context/authContext";
 import { useContext } from "react";
-import { Link } from "@mui/material";
+// import { Link } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useIsAuthenticated } from "react-auth-kit";
 
@@ -37,13 +37,13 @@ const LeftBar = () => {
           </div>
           <div className="item">
             <img src={Friends} alt="" />
-            {isAuth() ? 
-            (<NavLink to="/register">
-              Create a new account
-            </NavLink>) : 
-            (<NavLink to="/login">
-              Log in
-            </NavLink>)}
+            {isAuth() ?
+              (<NavLink to="/register">
+                Create a new account
+              </NavLink>) :
+              (<NavLink to="/login">
+                Log in
+              </NavLink>)}
           </div>
           <div className="item">
             <img src={Groups} alt="" />
