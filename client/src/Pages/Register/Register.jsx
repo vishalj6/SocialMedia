@@ -19,17 +19,16 @@ const Register = () => {
         setInputs({ ...inputs, [e.target.name]: e.target.value });
     };
 
+
     const handleClick = async (e) => {
         e.preventDefault();
+
         try {
-            await axios
-                .post("http://localhost:6001/register",
-                    { inputs }, { withCredentials: true })
+            await axios.post("/auth/register", inputs)
                 .then((result) => {
-                    console.log("submit data", result.data);
+                    console.log("submit data", result?.data);
                     navigate("/login");
-                })
-                .catch((err) => console.log(err));
+                });
         } catch (err) {
             if (err.response.status === 401) {
                 // console.log(err, err.response);
@@ -43,7 +42,7 @@ const Register = () => {
                 });
             }
             console.log(err);
-            setErr(err);
+            setErr(err.response.data);
         }
     };
 

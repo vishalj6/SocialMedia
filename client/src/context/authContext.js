@@ -1,20 +1,19 @@
 // import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { makeRequest } from "../axios";
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || {
-      name: "vishal",
-      profilePic: "https://pbs.twimg.com/profile_images/1279347647891959809/yZ9aMXnd_400x400.jpg"
-    }
+    JSON.parse(localStorage.getItem("user")) || null
   );
 
   const login = async (inputs) => {
-    setCurrentUser(inputs)
-  };
+    const res = await makeRequest.post("/auth/login", inputs);
 
+    setCurrentUser(res.data)
+  };
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(currentUser));
   }, [currentUser]);

@@ -3,28 +3,26 @@ import { AuthContext } from "../../context/authContext";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.scss";
 import { useState } from "react";
-import { useIsAuthenticated, useSignIn } from "react-auth-kit";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from "axios";
 
 const Login = () => {
-  const signIn = useSignIn();
-  const isAuth = useIsAuthenticated();
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
   const { login } = useContext(AuthContext);
 
+  const [err, setErr] = useState(null);
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
   });
 
   useEffect(() => {
-    if (isAuth()) {
+    if (currentUser) {
       navigate("/")
     }
-  }, [])
+  }, [currentUser, navigate])
+
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -32,37 +30,23 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("auth/login", { inputs }, { withCredentials: true });
-
-      console.log("rrrr", response);
-      if (response && response.status === 201) {
-        toast.success('successful', {
-          position: "top-center",
-        });
-        signIn({
-          token: response.data.token,
-          expiresIn: 3600,
-          tokenType: "Bearer",
-          authState: { username: inputs.username }
-        });
-        login(response.data.user);
-        console.log("This is Response data in Sign in", response.data);
-        // setCurrentUser(response.data.user);
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
-      }
+      await login(inputs);
+      toast.success('successful', {
+        position: "top-center",
+      });
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     }
     catch (err) {
       console.log(err);
-      if (err.response.status === 401) {
-        console.log(err, err.response);
+      setErr(err);
+      if (err?.response?.status === 401) {
         toast.error("Email or Password can't be Empty", {
           position: "top-center",
         });
       }
-      else if (err.response.status === 400) {
-        console.log(err, err.response);
+      else if (err?.response?.status === 400) {
         toast.error("Wrong Login credentials", {
           position: "top-center",
         });
@@ -108,6 +92,7 @@ const Login = () => {
                   </Link>
                 </p>
               </div>
+              <p>{err && err}</p>
             </div>
           </div>
         </div>

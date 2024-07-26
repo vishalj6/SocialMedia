@@ -4,7 +4,7 @@ import Map from "../../assets/map.png";
 import Friend from "../../assets/friend.png";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { makeRequest } from "../../axios";
 const Share = () => {
   const [file, setFile] = useState(null);
@@ -61,7 +61,7 @@ const Share = () => {
           </div>
           <div className="right">
             {file && (
-              <img className="file" alt="" src={URL.createObjectURL(file)} />
+              <img className="file" alt="file" src={URL.createObjectURL(file)} />
             )}
           </div>
         </div>

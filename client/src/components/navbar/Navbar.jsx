@@ -57,7 +57,7 @@ const Navbar = () => {
               <Link to="/login" style={{ textDecoration: 'none' }}>
                 <div className="user">
                   <img
-                    src={currentUser.profilePic}
+                    src={"/upload/" + currentUser.profilePic}
                     alt=""
                   />
                   <span>{currentUser.name}</span>

@@ -14,15 +14,22 @@ import Courses from "../../assets/12.png";
 import Fund from "../../assets/13.png";
 import { AuthContext } from "../../context/authContext";
 import { useContext } from "react";
-// import { Link } from "@mui/material";
-import { NavLink } from "react-router-dom";
-import { useIsAuthenticated } from "react-auth-kit";
+import { makeRequest } from "../../axios";
 
 const LeftBar = () => {
 
   // const isAuth = useAuth 
-  const isAuth = useIsAuthenticated();
   const { currentUser } = useContext(AuthContext);
+  const handleLogout = async () => {
+    try {
+      await makeRequest.post("/auth/logout");
+      localStorage.removeItem("user");
+      window.location.reload();
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="leftBar">
@@ -30,20 +37,17 @@ const LeftBar = () => {
         <div className="menu">
           <div className="user">
             <img
-              src={currentUser.profilePic}
+              src={"/upload/" + currentUser.profilePic}
               alt=""
             />
             <span>{currentUser.name}</span>
           </div>
           <div className="item">
             <img src={Friends} alt="" />
-            {isAuth() ?
-              (<NavLink to="/register">
-                Create a new account
-              </NavLink>) :
-              (<NavLink to="/login">
-                Log in
-              </NavLink>)}
+            {currentUser &&
+              (<div onClick={handleLogout}>
+                Log Out
+              </div>)}
           </div>
           <div className="item">
             <img src={Groups} alt="" />
